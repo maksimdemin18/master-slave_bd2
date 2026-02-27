@@ -157,10 +157,22 @@ Books Shard 2: primary шарда (read/write только для своей ч�
 
 ### Решение:
 
+++++++++++
+
+<img width="948" height="324" alt="image_2026-02-27_20-34-08" src="https://github.com/user-attachments/assets/dc53c5b9-e233-4a9a-92b4-7d8b9e27538e" />
+
+++++++++++
+
 Запускаем [docker-compose.yml](sharding-demo/docker-compose.yml)
 ```
 docker compose up -d
 ```
+++++++++++
+
+<img width="967" height="426" alt="image_2026-02-27_20-31-24" src="https://github.com/user-attachments/assets/9a8bdc1a-3aba-4d27-9435-19951a9b5581" />
+
+++++++++++
+
 Проверка users
 ```
 psql "postgresql://app:app@localhost:5433/users_db" -c "select * from users;"
@@ -177,6 +189,11 @@ psql "postgresql://app:app@localhost:5435/books_db" -c "select book_id, title fr
 ```
 psql "postgresql://app:app@localhost:5436/books_db" -c "select book_id, title from books order by book_id;"
 ```
+++++++++++
+
+<img width="967" height="702" alt="image_2026-02-27_20-32-14" src="https://github.com/user-attachments/assets/532e4220-cb7b-4542-b765-d9c805d72192" />
+
+++++++++++
 
 Как в приложении выбирать shard 
 
@@ -198,7 +215,11 @@ psql "postgresql://app:app@localhost:5433/users_db" -c \
  ('anna@example.com','Anna Smirnova')
 RETURNING *;"
 ```
+++++++++++
 
+<img width="967" height="372" alt="image_2026-02-27_20-32-54" src="https://github.com/user-attachments/assets/ee61d003-ba49-45a9-a33f-e10031a84a68" />
+
+++++++++++
 Добавить магазин
 ```
 psql "postgresql://app:app@localhost:5434/stores_db" -c \
@@ -216,3 +237,8 @@ psql "postgresql://app:app@localhost:5435/books_db" -c \
 psql "postgresql://app:app@localhost:5436/books_db" -c \
 "INSERT INTO books(title, author, price) VALUES ('Auto Book S2','Author S2',11.99) RETURNING book_id,title;"
 ```
+++++++++++
+
+<img width="963" height="791" alt="image_2026-02-27_20-33-22" src="https://github.com/user-attachments/assets/cd1cfad3-d585-4616-968b-170a7a1b19b2" />
+
+++++++++++
