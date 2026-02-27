@@ -135,7 +135,9 @@ books_shard_2 хранит книги с чётным book_id
               |-> [Stores DB] (stores)
               |-> [Books Shard1] (books where id odd)
               \-> [Books Shard2] (books where id even)
- ```             
+ ```
+<img width="1311" height="679" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/8c0ffd0b-27ed-4e94-9be4-207ec73874f6" />
+            
 5) Режимы работы серверов (что с чтением/записью)
 Users DB: primary (read/write)
 
@@ -175,9 +177,6 @@ psql "postgresql://app:app@localhost:5435/books_db" -c "select book_id, title fr
 ```
 psql "postgresql://app:app@localhost:5436/books_db" -c "select book_id, title from books order by book_id;"
 ```
-
-<img width="1311" height="679" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/8c0ffd0b-27ed-4e94-9be4-207ec73874f6" />
-
 
 Как в приложении выбирать shard 
 
