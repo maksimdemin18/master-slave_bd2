@@ -1,0 +1,68 @@
+services:
+  users-db:
+    image: postgres:16
+    container_name: users-db
+    environment:
+      POSTGRES_DB: users_db
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./init/users-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d users_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  stores-db:
+    image: postgres:16
+    container_name: stores-db
+    environment:
+      POSTGRES_DB: stores_db
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./init/stores-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d stores_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  books-shard-1:
+    image: postgres:16
+    container_name: books-shard-1
+    environment:
+      POSTGRES_DB: books_db
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./init/books-shard-1:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d books_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  books-shard-2:
+    image: postgres:16
+    container_name: books-shard-2
+    environment:
+      POSTGRES_DB: books_db
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+    ports:
+      - "5436:5432"
+    volumes:
+      - ./init/books-shard-2:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d books_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
