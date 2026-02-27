@@ -155,7 +155,7 @@ Books Shard 2: primary шарда (read/write только для своей ч�
 
 ### Решение:
 
-Запускаем [docker-compose.yml]()
+Запускаем [docker-compose.yml](sharding-demo/docker-compose.yml)
 ```
 docker compose up -d
 ```
